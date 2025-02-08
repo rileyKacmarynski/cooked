@@ -5,16 +5,13 @@ import { routeTree } from './routeTree.gen'
 import { Amplify } from 'aws-amplify'
 import config from './config'
 import { authService } from './lib/aws/cognito-auth-service'
-import { apiService } from './lib/aws/listings-api-service'
 import { QueryClient } from '@tanstack/react-query'
 import type { AuthService } from './lib/auth-servce'
-import type { ApiService } from './lib/api-service'
 
 export const queryClient = new QueryClient()
 
 export type RouteContext = {
   authService: AuthService
-  apiService: ApiService
   queryClient: QueryClient
 }
 
@@ -22,7 +19,6 @@ const router = createRouter({
   routeTree,
   context: {
     authService,
-    apiService,
     queryClient,
   },
   defaultPreload: 'intent',
@@ -47,10 +43,10 @@ Amplify.configure({
   },
   API: {
     REST: {
-      listings: {
-        endpoint: config.apiGateway.URL,
-        region: config.apiGateway.REGION,
-      },
+      // api-name: {
+      //   endpoint: config.apiGateway.URL,
+      //   region: config.apiGateway.REGION,
+      // },
     },
   },
 })

@@ -16,7 +16,6 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar'
 import UserProvider from '@/lib/user-provider'
-import { FileDropzone } from '@/components/file-dropzone'
 
 export const Route = createFileRoute('/_app')({
   component: RouteComponent,
@@ -62,10 +61,9 @@ function RouteComponent() {
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
-            <FileDropzone className="ml-auto" />
           </header>
-          {/* TODO: Maybe make the table scroll instead? */}
           <div className="overflow-y-scroll p-4">
+            {/* create a full page loader component */}
             <React.Suspense fallback={<div>loading...</div>}>
               <Outlet />
             </React.Suspense>
