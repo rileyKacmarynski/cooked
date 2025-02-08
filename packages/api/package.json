@@ -1,0 +1,14 @@
+{
+  "name": "@cooked/api",
+  "version": "1.0.0",
+  "dependencies": {
+    "@hono/zod-validator": "^0.4.2",
+    "@cooked/core": "workspace:*",
+    "hono": "^4.6.20",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
