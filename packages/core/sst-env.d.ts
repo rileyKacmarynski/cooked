@@ -2,8 +2,21 @@
 /* tslint:disable */
 /* eslint-disable */
 /* deno-fmt-ignore-file */
-
-/// <reference path="../../sst-env.d.ts" />
-
 import "sst"
 export {}
+declare module "sst" {
+  export interface Resource {
+    "Database": {
+      "database": string
+      "host": string
+      "password": string
+      "port": number
+      "type": "sst.aws.Postgres"
+      "username": string
+    }
+    "Vpc": {
+      "bastion": string
+      "type": "sst.aws.Vpc"
+    }
+  }
+}
