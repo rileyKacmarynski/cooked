@@ -22,6 +22,7 @@ export default $config({
       identityPool: auth.identityPool.id,
       userPoolClient: auth.userPoolClient.id,
       cognitoDomain: auth.domain,
+      env: storage.env,
     }
   },
 })

@@ -59,9 +59,6 @@ declare module '@tanstack/react-router' {
   }
 }
 
-const loginUrl = `https://${config.cognito.DOMAIN}/login?response_type=code&client_id=6u8404kt4ka2m029pmm8kfedou&redirect_uri=http://localhost:3002`
-console.log(encodeURI(loginUrl))
-
 const rootElement = document.getElementById('app')
 if (!rootElement) throw new Error()
 

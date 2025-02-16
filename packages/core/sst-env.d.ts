@@ -51,5 +51,10 @@ declare module "sst" {
       "secret": string
       "type": "sst.aws.CognitoUserPoolClient"
     }
+    "Zero": {
+      "service": string
+      "type": "sst.aws.Service"
+      "url": string
+    }
   }
 }

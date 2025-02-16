@@ -2,9 +2,7 @@
   "name": "cooked",
   "module": "index.ts",
   "type": "module",
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": ["packages/*"],
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@types/aws-lambda": "8.10.147",
@@ -20,6 +18,7 @@
   "trustedDependencies": [
     "@biomejs/biome",
     "aws-sdk",
-    "esbuild"
+    "esbuild",
+    "@rocicorp/zero-sqlite3"
   ]
 }
