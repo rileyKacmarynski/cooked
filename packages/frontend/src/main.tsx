@@ -7,6 +7,35 @@ import config from './config'
 import { authService } from './lib/aws/cognito-auth-service'
 import { QueryClient } from '@tanstack/react-query'
 import type { AuthService } from './lib/auth-servce'
+import { Hub } from 'aws-amplify/utils'
+
+Hub.listen('auth', ({ payload, ...rest }) => {
+  console.log('stuff', { payload, ...rest })
+
+  switch (payload.event) {
+    case 'signedIn':
+      console.log('user have been signedIn successfully.')
+      break
+    case 'signedOut':
+      console.log('user have been signedOut successfully.')
+      break
+    case 'tokenRefresh':
+      console.log('auth tokens have been refreshed.')
+      break
+    case 'tokenRefresh_failure':
+      console.log('failure while refreshing auth tokens.')
+      break
+    case 'signInWithRedirect':
+      console.log('signInWithRedirect API has successfully been resolved.')
+      break
+    case 'signInWithRedirect_failure':
+      console.log('failure while trying to resolve signInWithRedirect API.')
+      break
+    case 'customOAuthState':
+      console.info('custom state returned from CognitoHosted UI')
+      break
+  }
+})
 
 export const queryClient = new QueryClient()
 
@@ -30,7 +59,11 @@ declare module '@tanstack/react-router' {
   }
 }
 
-const rootElement = document.getElementById('app')!
+const loginUrl = `https://${config.cognito.DOMAIN}/login?response_type=code&client_id=6u8404kt4ka2m029pmm8kfedou&redirect_uri=http://localhost:3002`
+console.log(encodeURI(loginUrl))
+
+const rootElement = document.getElementById('app')
+if (!rootElement) throw new Error()
 
 Amplify.configure({
   Auth: {
@@ -39,6 +72,22 @@ Amplify.configure({
       identityPoolId: config.cognito.IDENTITY_POOL_ID,
       userPoolClientId: config.cognito.APP_CLIENT_ID,
       allowGuestAccess: false,
+      loginWith: {
+        oauth: {
+          domain: config.cognito.DOMAIN,
+          scopes: [
+            'email',
+            'openid',
+            'profile',
+            'phone',
+            'aws.cognito.signin.user.admin',
+          ],
+          redirectSignIn: ['http://localhost:3002'],
+          redirectSignOut: ['http://localhost:3002'],
+          responseType: 'code',
+          providers: ['Google'],
+        },
+      },
     },
   },
   API: {

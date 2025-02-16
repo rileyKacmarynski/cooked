@@ -16,6 +16,7 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar'
 import UserProvider from '@/lib/user-provider'
+import { FullPageLoader } from '@/components/ui/loading-indicator'
 
 export const Route = createFileRoute('/_app')({
   component: RouteComponent,
@@ -50,21 +51,19 @@ function RouteComponent() {
           <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="/">Listing Tools</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Retail spreadsheet</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
+            {/* <Breadcrumb> */}
+            {/*   <BreadcrumbList> */}
+            {/*     <BreadcrumbItem className="hidden md:block"> */}
+            {/*       <BreadcrumbLink href="/">Listing Tools</BreadcrumbLink> */}
+            {/*     </BreadcrumbItem> */}
+            {/*     <BreadcrumbSeparator className="hidden md:block" /> */}
+            {/*     <BreadcrumbItem></BreadcrumbItem> */}
+            {/*   </BreadcrumbList> */}
+            {/* </Breadcrumb> */}
           </header>
-          <div className="overflow-y-scroll p-4">
-            {/* create a full page loader component */}
-            <React.Suspense fallback={<div>loading...</div>}>
+          <div className="p-4 h-full">
+            {/* TODO: figure out some way to pass in a skeleton for each route */}
+            <React.Suspense fallback={<FullPageLoader />}>
               <Outlet />
             </React.Suspense>
           </div>

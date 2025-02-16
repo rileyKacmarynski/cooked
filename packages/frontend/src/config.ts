@@ -8,6 +8,7 @@ const config = {
     USER_POOL_ID: import.meta.env.VITE_USER_POOL_ID,
     APP_CLIENT_ID: import.meta.env.VITE_USER_POOL_CLIENT_ID,
     IDENTITY_POOL_ID: import.meta.env.VITE_IDENTITY_POOL_ID,
+    DOMAIN: import.meta.env.VITE_COGNITO_DOMAIN,
   },
 }
 

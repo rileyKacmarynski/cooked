@@ -63,9 +63,13 @@ export const authService: AuthService = {
       const { userId } = await getCurrentUser()
       const { email } = await fetchUserAttributes()
 
+      if (!email) {
+        throw new Error(`Unable to fetch email attribute for user ${userId}.`)
+      }
+
       return {
         id: userId,
-        email: email!,
+        email: email,
       }
     } catch (e) {
       console.error(e)

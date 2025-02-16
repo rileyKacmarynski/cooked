@@ -1,3 +1,7 @@
+import {
+  FullPageLoader,
+  LoadingIndicator,
+} from '@/components/ui/loading-indicator'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_app/')({
@@ -6,7 +10,5 @@ export const Route = createFileRoute('/_app/')({
 })
 
 function RouteComponent() {
-  const { apiService } = Route.useRouteContext()
-
-  return <h1>Hello world</h1>
+  return <FullPageLoader />
 }

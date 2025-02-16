@@ -1,10 +1,6 @@
-export const vpc = new sst.aws.Vpc('Vpc', {
-  bastion: true,
-  nat: 'ec2',
-  az: 2,
-})
+import { vpc } from './vpc'
 
-export const database = new sst.aws.Postgres('Database', {
+export const database = new sst.aws.Postgres('Postgres', {
   vpc,
   proxy: false,
   database: 'cooked',

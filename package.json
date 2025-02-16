@@ -14,7 +14,8 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "sst": "3.8.8"
+    "@pulumi/aws": "^6.68.0",
+    "sst": "3.9.2"
   },
   "trustedDependencies": [
     "@biomejs/biome",

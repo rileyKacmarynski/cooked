@@ -1,0 +1,12 @@
+{
+  "name": "@cooked/functions",
+  "version": "1.0.0",
+  "scripts": {},
+  "dependencies": { "aws-lambda": "^1.0.7" },
+  "exports": {
+    "./*": ["./src/*.ts"]
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

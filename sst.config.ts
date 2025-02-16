@@ -3,24 +3,25 @@
 export default $config({
   app(input) {
     return {
-      name: 'cooked',
+      name: 'cooked-v1',
       removal: input?.stage === 'production' ? 'retain' : 'remove',
       home: 'aws',
     }
   },
   async run() {
-    // const api = await import('./infra/api')
-    // const auth = await import('./infra/auth')
+    const vpc = await import('./infra/vpc.ts')
     const storage = await import('./infra/storage.ts')
-    // await import('./infra/web')
+    const auth = await import('./infra/auth')
+    await import('./infra/web')
 
     return {
       region: aws.getRegionOutput().name,
-      vpc: storage.vpc.urn,
-      // api: api.api.url,
-      // userPool: auth.userPool.id,
-      // identityPool: auth.identityPool.id,
-      // userPoolClient: auth.userPoolClient.id,
+      vpc: vpc.vpc.urn,
+      db: storage.database.host,
+      userPool: auth.userPool.id,
+      identityPool: auth.identityPool.id,
+      userPoolClient: auth.userPoolClient.id,
+      cognitoDomain: auth.domain,
     }
   },
 })

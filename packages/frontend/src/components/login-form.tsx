@@ -21,8 +21,10 @@ type LoginFormInputs = z.infer<typeof loginSchema>
 
 export function LoginForm({
   login,
+  loginWithRedirect,
 }: {
   login: (username: string, password: string) => Promise<void>
+  loginWithRedirect: () => Promise<void>
 }) {
   const {
     register,
@@ -55,7 +57,7 @@ export function LoginForm({
               placeholder="me@example.com"
             />
             {errors.email && (
-              <p className="text-sm text-rose-600">{errors.email.message}</p>
+              <p className="text-sm text-destructive">{errors.email.message}</p>
             )}
           </div>
           <div className="grid gap-2">
@@ -64,11 +66,21 @@ export function LoginForm({
             </div>
             <Input {...register('password')} id="password" type="password" />
             {errors.password && (
-              <p className="text-sm text-rose-600">{errors.password.message}</p>
+              <p className="text-sm text-destructive">
+                {errors.password.message}
+              </p>
             )}
           </div>
           <Button type="submit" className="w-full">
             Login
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full"
+            onClick={loginWithRedirect}
+          >
+            Login with Google
           </Button>
         </form>
       </CardContent>

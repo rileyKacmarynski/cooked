@@ -1,9 +1,19 @@
 import { LoginForm } from '@/components/login-form'
-import { createFileRoute } from '@tanstack/react-router'
+import { signInWithRedirect } from '@aws-amplify/auth'
+import { createFileRoute, redirect } from '@tanstack/react-router'
 import { toast } from 'sonner'
 
 export const Route = createFileRoute('/login')({
   component: RouteComponent,
+  // redirect to main if already logged in
+  beforeLoad: async ({ context }) => {
+    const user = await context.authService.getUser()
+    if (user) {
+      throw redirect({
+        to: '/',
+      })
+    }
+  },
 })
 
 function RouteComponent() {
@@ -27,7 +37,10 @@ function RouteComponent() {
 
   return (
     <main className="h-dvh grid place-items-center">
-      <LoginForm login={login} />
+      <LoginForm
+        login={login}
+        loginWithRedirect={() => signInWithRedirect({ provider: 'Google' })}
+      />
     </main>
   )
 }
