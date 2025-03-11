@@ -4,10 +4,16 @@ import {
   getCurrentUser,
   fetchUserAttributes,
   confirmSignIn,
+  signInWithRedirect,
+  fetchAuthSession,
 } from 'aws-amplify/auth'
 import type { AuthService } from '../auth-servce'
 
 export const authService: AuthService = {
+  async loginWithRedirect() {
+    await signInWithRedirect({ provider: 'Google' })
+  },
+
   async login(email, password) {
     try {
       const result = await signIn({ username: email, password })
@@ -70,6 +76,23 @@ export const authService: AuthService = {
       return {
         id: userId,
         email: email,
+      }
+    } catch (e) {
+      console.error(e)
+      return null
+    }
+  },
+  async getSession() {
+    try {
+      const session = await fetchAuthSession()
+
+      if (!session) {
+        throw new Error('Unable to fetch session.')
+      }
+
+      return {
+        idToken: session.tokens?.idToken?.toString(),
+        accessToken: session.tokens?.accessToken?.toString(),
       }
     } catch (e) {
       console.error(e)

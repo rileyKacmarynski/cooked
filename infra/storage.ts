@@ -27,23 +27,12 @@ export const database = new sst.aws.Postgres('Postgres', {
   },
 })
 
-// zero cluster
-export const cluster = new sst.aws.Cluster('Cluster', { vpc })
-export const connection = $interpolate`postgres://${database.username}:${database.password}@${database.host}:${database.port}`
-cluster.addService('Zero', {
-  image: 'rocicorp/zero',
+new sst.x.DevCommand('Drizzle', {
+  link: [database],
   dev: {
-    command: 'bunx zero-cache-dev',
-  },
-  loadBalancer: {
-    ports: [{ listen: '80/http', forward: '4848/http' }],
-  },
-  environment: {
-    ZERO_SCHEMA_PATH: 'packages/db/schema.ts',
-    ZERO_UPSTREAM_DB: $interpolate`${connection}/${database.database}`,
-    ZERO_CVR_DB: $interpolate`${connection}`,
-    ZERO_CHANGE_DB: $interpolate`${connection}`,
-    ZERO_REPLICA_FILE: 'zero.db',
-    ZERO_NUM_SYNC_WORKERS: '1',
+    autostart: true,
+    command: 'npx drizzle-kit studio --config=./packages/db/drizzle.config.ts',
   },
 })
+
+export const connectionString = $interpolate`postgresql://${database.username}:${database.password}@${database.host}/${database.database}`

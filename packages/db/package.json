@@ -3,16 +3,23 @@
   "version": "1.0.0",
   "type": "module",
   "exports": {
-    "./*": ["./src/*.ts"]
+    ".": {
+      "import": "./index.ts",
+      "types": "./index.ts"
+    }
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "db": "sst shell drizzle-kit"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@rocicorp/zero": "^0.15.2025021402"
+    "@rocicorp/zero": "^0.16.2025022800",
+    "@types/pg": "^8.11.11",
+    "drizzle-kit": "^0.30.5",
+    "drizzle-orm": "^0.40.0",
+    "pg": "^8.13.3"
   }
 }

@@ -1,4 +1,8 @@
 export type UserSession = { id: string; email: string }
+export type Tokens = {
+  idToken?: string
+  accessToken?: string
+}
 
 export type AuthService = {
   login: (
@@ -9,7 +13,9 @@ export type AuthService = {
     changePassword: boolean
     error: boolean
   }>
+  loginWithRedirect(): Promise<void>
   logout: () => Promise<void>
   changePassword: (password: string) => Promise<{ error: boolean }>
   getUser: () => Promise<UserSession | null>
+  getSession: () => Promise<Tokens | null>
 }

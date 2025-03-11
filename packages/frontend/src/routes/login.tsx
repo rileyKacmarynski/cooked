@@ -39,7 +39,7 @@ function RouteComponent() {
     <main className="h-dvh grid place-items-center">
       <LoginForm
         login={login}
-        loginWithRedirect={() => signInWithRedirect({ provider: 'Google' })}
+        loginWithRedirect={authService.loginWithRedirect}
       />
     </main>
   )

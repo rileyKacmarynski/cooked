@@ -2,11 +2,14 @@
 /* tslint:disable */
 /* eslint-disable */
 /* deno-fmt-ignore-file */
-import "sst"
-export {}
+
 declare module "sst" {
   export interface Resource {
     "ALLOWED_EXTERNAL_EMAILS": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
+    "DB_CONNECTION_URL": {
       "type": "sst.sst.Secret"
       "value": string
     }
@@ -51,10 +54,13 @@ declare module "sst" {
       "secret": string
       "type": "sst.aws.CognitoUserPoolClient"
     }
-    "Zero": {
-      "service": string
-      "type": "sst.aws.Service"
-      "url": string
+    "zero-replication-bucket": {
+      "name": string
+      "type": "sst.aws.Bucket"
     }
   }
 }
+/// <reference path="sst-env.d.ts" />
+
+import "sst"
+export {}

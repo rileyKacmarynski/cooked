@@ -3,6 +3,9 @@ const config = {
   //   REGION: import.meta.env.VITE_REGION,
   //   URL: import.meta.env.VITE_API_URL,
   // },
+  zero: {
+    server: import.meta.env.VITE_ZERO_SERVER,
+  },
   cognito: {
     REGION: import.meta.env.VITE_REGION,
     USER_POOL_ID: import.meta.env.VITE_USER_POOL_ID,

@@ -15,7 +15,7 @@ const preAuthFunction = new sst.aws.Function('PreAuthHandler', {
 
 export const userPool = new sst.aws.CognitoUserPool('Users', {
   // not specifying this causes weird flakey errors
-  mfa: 'optional',
+  // mfa: 'optional',
   triggers: {
     preAuthentication: preAuthFunction.arn,
   },
@@ -33,6 +33,8 @@ const provider = userPool.addIdentityProvider('Google', {
     username: 'sub',
   },
 })
+
+export const jwksUrl = $interpolate`https://${userPool.nodes.userPool.endpoint}/.well-known/jwks.json`
 
 const userPoolDomain = new aws.cognito.UserPoolDomain('Cooked', {
   userPoolId: userPool.id,

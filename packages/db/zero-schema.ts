@@ -7,17 +7,26 @@ import {
   ANYONE_CAN,
   definePermissions,
   type ExpressionBuilder,
+  ANYONE_CAN_DO_ANYTHING,
 } from '@rocicorp/zero'
 
-const recipes = table('recipes')
+// const recipes = table('recipe')
+//   .columns({
+//     id: number(),
+//     name: string(),
+//     servings: string(),
+//     protein: string(),
+//     carbs: string(),
+//     fat: string(),
+//     content: string(),
+//   })
+//   .primaryKey('id')
+
+const counters = table('counters')
+  .from('counter')
   .columns({
     id: number(),
-    name: string(),
-    servings: string(),
-    protein: string(),
-    carbs: string(),
-    fat: string(),
-    content: string(),
+    count: number(),
   })
   .primaryKey('id')
 
@@ -32,11 +41,12 @@ const recipes = table('recipes')
 //   });
 
 export const schema = createSchema(1, {
-  tables: [recipes],
+  tables: [counters],
 })
 
 export type Schema = typeof schema
-export type Recipe = Row<typeof schema.tables.recipes>
+// export type Recipe = Row<typeof schema.tables.recipes>
+export type Counter = Row<typeof schema.tables.counters>
 
 type AuthData = {
   sub: string | null
@@ -44,12 +54,13 @@ type AuthData = {
 
 export const permissions = definePermissions<AuthData, Schema>(schema, () => {
   return {
-    recipes: {
-      row: {
-        select: ANYONE_CAN,
-        insert: ANYONE_CAN,
-        delete: ANYONE_CAN,
-      },
-    },
+    // recipes: {
+    //   row: {
+    //     select: ANYONE_CAN,
+    //     insert: ANYONE_CAN,
+    //     delete: ANYONE_CAN,
+    //   },
+    // },
+    counters: ANYONE_CAN_DO_ANYTHING,
   }
 })

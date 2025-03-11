@@ -1,4 +1,5 @@
-import { userPool, userPoolClient, identityPool, domain } from './auth'
+import { userPool, userPoolClient, identityPool, domain, jwksUrl } from './auth'
+import { viewSyncerEndpoint } from './zero-sync-engine.ts'
 
 const region = aws.getRegionOutput().name
 
@@ -12,8 +13,8 @@ export const frontend = new sst.aws.StaticSite('Frontend', {
   // domain:
   //   $app.stage === 'production'
   //     ? {
-  //         name: 'listings-app.com',
-  //         redirects: ['www.listings-app.com'],
+  //         name: domain.com',
+  //         redirects: ['www.domain.com'],
   //       }
   //     : undefined,
   environment: {
@@ -22,5 +23,8 @@ export const frontend = new sst.aws.StaticSite('Frontend', {
     VITE_IDENTITY_POOL_ID: identityPool.id,
     VITE_USER_POOL_CLIENT_ID: userPoolClient.id,
     VITE_COGNITO_DOMAIN: domain,
+    VITE_COGNITO_JWKS_URL: jwksUrl,
+    // TODO: need to pass zero stuff here
+    VITE_ZERO_SERVER: viewSyncerEndpoint,
   },
 })

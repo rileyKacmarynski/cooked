@@ -177,4 +177,4 @@ dist
 # sst
 .sst
 
-zero.db*
+*.db*
