@@ -2,7 +2,7 @@ import { execSync } from 'node:child_process'
 import { vpc } from './vpc'
 import { jwksUrl } from './auth'
 import { DevCommand } from '../.sst/platform/src/components/experimental'
-import { DbConnectionUrl } from './secrets'
+import { connectionString } from './storage'
 
 // zero cluster
 const zeroVersion = execSync(
@@ -27,9 +27,9 @@ console.log('using zero image: ', `rocicorp/zero:${zeroVersion}`)
 
 // Common environment variables
 const commonEnv = {
-  ZERO_UPSTREAM_DB: DbConnectionUrl.value,
-  ZERO_CVR_DB: DbConnectionUrl.value,
-  ZERO_CHANGE_DB: DbConnectionUrl.value,
+  ZERO_UPSTREAM_DB: connectionString,
+  ZERO_CVR_DB: connectionString,
+  ZERO_CHANGE_DB: connectionString,
   // ZERO_AUTH_SECRET: zeroAuthSecret.value,
   ZERO_AUTH_JWKS_URL: jwksUrl,
   ZERO_REPLICA_FILE: 'sync-replica.db',
