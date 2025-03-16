@@ -56,7 +56,6 @@ export const userPoolClient = userPool.addClient('Web', {
   },
 })
 
-// TODO: THIS SHIT NEEDS TO GO AH GOT A CIRCULAR DEPENDENCY
 export const identityPool = new sst.aws.CognitoIdentityPool('IdentityPool', {
   userPools: [{ userPool: userPool.id, client: userPoolClient.id }],
   permissions: {
