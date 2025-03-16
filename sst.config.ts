@@ -1,5 +1,4 @@
 /// <reference path="./.sst/platform/config.d.ts" />
-
 export default $config({
   app(input) {
     return {
@@ -8,16 +7,16 @@ export default $config({
       home: 'aws',
       providers: {
         command: true,
+        '@pulumiverse/vercel': '1.14.3',
       },
     }
   },
   async run() {
-    const vpc = await import('./infra/vpc.ts')
-    const storage = await import('./infra/storage.ts')
+    const vpc = await import('./infra/vpc')
+    const storage = await import('./infra/storage')
     const auth = await import('./infra/auth')
     await import('./infra/web')
-    const zero = await import('./infra/zero-sync-engine.ts')
-
+    const zero = await import('./infra/zero-sync-engine')
     return {
       region: aws.getRegionOutput().name,
       vpc: vpc.vpc.urn,
@@ -30,6 +29,7 @@ export default $config({
       jwksUrl: auth.jwksUrl,
       // TODO: This is in an if statement that doesn't run in dev mode
       sync: zero.viewSyncerEndpoint,
+      replciation: zero.replicationManagerService.url,
       // ...zero.zeroEnv,
     }
   },

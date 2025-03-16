@@ -9,10 +9,6 @@ declare module "sst" {
       "type": "sst.sst.Secret"
       "value": string
     }
-    "DB_CONNECTION_URL": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
     "Frontend": {
       "type": "sst.aws.StaticSite"
       "url": string
@@ -53,6 +49,16 @@ declare module "sst" {
       "id": string
       "secret": string
       "type": "sst.aws.CognitoUserPoolClient"
+    }
+    "replication-manager": {
+      "service": string
+      "type": "sst.aws.Service"
+      "url": string
+    }
+    "view-syncer": {
+      "service": string
+      "type": "sst.aws.Service"
+      "url": string
     }
     "zero-replication-bucket": {
       "name": string

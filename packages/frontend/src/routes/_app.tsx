@@ -37,9 +37,7 @@ export const Route = createFileRoute('/_app')({
     const zeroClient = new Zero({
       userID: user.id,
       auth: async () => {
-        // TODO: No idea if this will work, what token do we need?
         const session = await authService.getSession()
-        console.log('user', { user, session })
         return session?.accessToken
       },
       server: config.zero.server,
