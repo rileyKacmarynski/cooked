@@ -27,7 +27,6 @@ export default $config({
       userPoolClient: auth.userPoolClient.id,
       cognitoDomain: auth.domain,
       jwksUrl: auth.jwksUrl,
-      // TODO: This is in an if statement that doesn't run in dev mode
       sync: zero.viewSyncerEndpoint,
       replciation: zero.replicationManagerService.url,
       // ...zero.zeroEnv,

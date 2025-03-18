@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:16.4
+    container_name: postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.sst/storage/postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cooked
+    command: ["postgres", "-c", "wal_level=logical"]

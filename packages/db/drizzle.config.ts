@@ -11,6 +11,6 @@ export default defineConfig({
     user: Resource.Postgres.username,
     password: Resource.Postgres.password,
     database: Resource.Postgres.database,
-    ssl: 'require',
+    ssl: Resource.Postgres.host === 'localhost' ? undefined : 'require',
   },
 })

@@ -1,5 +1,6 @@
 import { vpc } from './vpc'
 
+// use this if I want to only have 1 db for all stages
 // function createDb(name: string) {
 //   return new sst.aws.Postgres(name, {
 //     vpc,
@@ -33,16 +34,22 @@ import { vpc } from './vpc'
 //     },
 //   })
 // }
-//
-// const database =
-//   $app.stage === 'production'
-//     ? createDb('Postgres')
-//     : sst.aws.Postgres.get('Postgres', { id: '' })
 
+// const database =
+//   $app.stage !== 'production' || !process.env.DB
+//     ? sst.aws.Postgres.get('Postgres', { id: '' })
+//     : createDb(process.env.DB)
+
+// in dev mode run local db
 export const database = new sst.aws.Postgres('Postgres', {
   vpc,
   proxy: false,
   database: 'cooked',
+  dev: {
+    username: 'postgres',
+    password: 'postgres',
+    database: 'cooked',
+  },
   transform: {
     parameterGroup: {
       parameters: [
@@ -75,7 +82,7 @@ new sst.x.DevCommand('Drizzle', {
   link: [database],
   dev: {
     autostart: true,
-    command: 'npx drizzle-kit studio --config=./packages/db/drizzle.config.ts',
+    command: `npx drizzle-kit studio --config=${process.cwd()}/packages/db/drizzle.config.ts`,
   },
 })
 
