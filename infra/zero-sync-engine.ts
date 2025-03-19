@@ -31,11 +31,11 @@ const commonEnv = {
   ZERO_CVR_DB: connectionString,
   ZERO_CHANGE_DB: connectionString,
   ZERO_AUTH_JWKS_URL: jwksUrl,
-  ZERO_REPLICA_FILE: 'sync-replica.db',
+  ZERO_REPLICA_FILE: $dev ? '.zero/sync-replica.db' : 'sync-replica.db',
   ZERO_LITESTREAM_BACKUP_URL: $interpolate`s3://${replicationBucket.name}/backup`,
   // TODO: IDK why the version isn't working
   // ZERO_IMAGE_URL: `rocicorp/zero:${zeroVersion}`,
-  ZERO_IMAGE_URL: 'rocicorp/zero:0.16.2025022800',
+  ZERO_IMAGE_URL: 'rocicorp/zero:0.17.2025031400',
   ZERO_CVR_MAX_CONNS: '10',
   ZERO_UPSTREAM_MAX_CONNS: '10',
 }
