@@ -14,7 +14,7 @@ export const Route = createFileRoute('/_app/')({
 function RouteComponent() {
   const { useZero } = Route.useRouteContext()
   const z = useZero()
-  const query = z.query.counters.one()
+  const query = z.query.recipes.one()
   const [counter] = useQuery(query)
 
   if (!counter) {
@@ -23,17 +23,7 @@ function RouteComponent() {
 
   return (
     <div className="flex gap-2">
-      <Button
-        onClick={() =>
-          z.mutate.counters.update({
-            id: counter.id,
-            count: counter.count + 1,
-          })
-        }
-      >
-        Increment
-      </Button>
-      <span>count: {counter?.count}</span>
+      <Button>Increment</Button>
     </div>
   )
 }

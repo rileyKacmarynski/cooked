@@ -1,6 +1,6 @@
 {
-  "id": "bcf07ef1-8f3b-4b13-baa4-afd9be535824",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "e1fe9e69-a89f-4fc3-92fa-da4f5b687bf5",
+  "prevId": "36f7b70e-e2be-431d-94ec-051d3210d87b",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -131,8 +131,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "recipie_id": {
-          "name": "recipie_id",
+        "recipe_id": {
+          "name": "recipe_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -165,12 +165,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "recipe_instructions_recipie_id_recipes_id_fk": {
-          "name": "recipe_instructions_recipie_id_recipes_id_fk",
+        "recipe_instructions_recipe_id_recipes_id_fk": {
+          "name": "recipe_instructions_recipe_id_recipes_id_fk",
           "tableFrom": "recipe_instructions",
           "tableTo": "recipes",
           "columnsFrom": [
-            "recipie_id"
+            "recipe_id"
           ],
           "columnsTo": [
             "id"
@@ -194,6 +194,12 @@
           "type": "serial",
           "primaryKey": true,
           "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "servings": {
           "name": "servings",

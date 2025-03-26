@@ -1,6 +1,6 @@
 {
-  "id": "bcf07ef1-8f3b-4b13-baa4-afd9be535824",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "36f7b70e-e2be-431d-94ec-051d3210d87b",
+  "prevId": "bcf07ef1-8f3b-4b13-baa4-afd9be535824",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -194,6 +194,12 @@
           "type": "serial",
           "primaryKey": true,
           "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "servings": {
           "name": "servings",
